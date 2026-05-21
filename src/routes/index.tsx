@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   Eye,
   MousePointerClick,
@@ -23,6 +24,10 @@ import {
 import studioLogo from "@/assets/studio21-logo.png";
 import googleAdsLogo from "@/assets/google-ads-logo.png";
 import googleAdsDashboard from "@/assets/google-ads-dashboard.png";
+// Adicione aqui os imports dos outros dois prints se necessário:
+// import googleAdsPrint2 from "@/assets/google-ads-print2.png";
+// import googleAdsPrint3 from "@/assets/google-ads-print3.png";
+
 import { Section } from "@/components/report/Section";
 import { MetricCard } from "@/components/report/MetricCard";
 
@@ -52,7 +57,24 @@ const fadeUp = {
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
 };
 
+// Array de imagens do carrossel rotativo
+const carouselImages = [
+  googleAdsDashboard, 
+  googleAdsDashboard, // Substitua pelo import do print 2
+  googleAdsDashboard, // Substitua pelo import do print 3
+];
+
 function ReportPage() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Efeito para alternar as imagens automaticamente a cada 5 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* ---------- TOP BAR ---------- */}
@@ -73,61 +95,94 @@ function ReportPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-60" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
-        <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-16 md:px-8 md:pb-32 md:pt-24">
-          <motion.div {...fadeUp} className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-ink-soft">
-            <span className="flex h-1.5 w-1.5 rounded-full bg-ga-green animate-pulse" />
-            Relatório de Performance
-          </motion.div>
+        
+        {/* Transformado em Grid 12 colunas a partir do md: para separar em Lado Esquerdo e Lado Direito */}
+        <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-16 md:px-8 md:pb-32 md:pt-24 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+          
+          {/* COLUNA DA ESQUERDA (Conteúdo, Metadados e Logo) */}
+          <div className="md:col-span-7 z-10">
+            <motion.div {...fadeUp} className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-ga-green animate-pulse" />
+              Relatório de Performance
+            </motion.div>
 
-          <motion.h1
-            {...fadeUp}
-            transition={{ ...fadeUp.transition, delay: 0.05 }}
-            className="mt-6 font-display text-[44px] leading-[0.95] tracking-tight text-ink md:text-[96px]"
-          >
-            Google Ads
-            <br />
-            <span className="text-ink-soft">Studio 21</span>
-          </motion.h1>
+            <motion.h1
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.05 }}
+              className="mt-6 font-display text-[44px] leading-[0.95] tracking-tight text-ink md:text-[80px]"
+            >
+              Google Ads
+              <br />
+              <span className="text-ink-soft">Studio 21</span>
+            </motion.h1>
 
-          <motion.p
-            {...fadeUp}
-            transition={{ ...fadeUp.transition, delay: 0.1 }}
-            className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl"
-          >
-            Este relatório apresenta, de forma simples e direta, os resultados do{" "}
-            <span className="text-ink">primeiro mês</span> de campanhas no Google Ads para o
-            Studio 21. O objetivo é mostrar com clareza o que foi feito, o que foi alcançado e qual
-            é a estratégia de crescimento para os próximos meses.
-          </motion.p>
+            <motion.p
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.1 }}
+              className="mt-8 max-w-xl text-lg leading-relaxed text-ink-soft"
+            >
+              Este relatório apresenta, de forma simples e direta, os resultados do{" "}
+              <span className="text-ink">primeiro mês</span> de campanhas no Google Ads para o
+              Studio 21. O objetivo é mostrar com clareza o que foi feito, o que foi alcançado e qual
+              é a estratégia de crescimento para os próximos meses.
+            </motion.p>
 
-          <motion.div
-            {...fadeUp}
-            transition={{ ...fadeUp.transition, delay: 0.18 }}
-            className="mt-12 grid grid-cols-2 gap-4 md:max-w-2xl md:grid-cols-4"
-          >
-            {[
-              { k: "Período", v: "30 dias" },
-              { k: "Plataforma", v: "Google Ads" },
-              { k: "Região", v: "Itanhaém · Mongaguá" },
-              { k: "Ciclo", v: "1º mês" },
-            ].map((it) => (
-              <div key={it.k} className="rounded-xl border border-hairline bg-surface/60 p-4">
-                <div className="text-[10px] font-medium uppercase tracking-[0.18em] text-ink-soft">
-                  {it.k}
+            <motion.div
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.18 }}
+              className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4"
+            >
+              {[
+                { k: "Período", v: "30 dias" },
+                { k: "Plataforma", v: "Google Ads" },
+                { k: "Região", v: "Itanhaém · Mongaguá" },
+                { k: "Ciclo", v: "1º mês" },
+              ].map((it) => (
+                <div key={it.k} className="rounded-xl border border-hairline bg-surface/60 p-4">
+                  <div className="text-[10px] font-medium uppercase tracking-[0.18em] text-ink-soft">
+                    {it.k}
+                  </div>
+                  <div className="mt-1 text-sm font-medium text-ink">{it.v}</div>
                 </div>
-                <div className="mt-1 text-sm font-medium text-ink">{it.v}</div>
-              </div>
-            ))}
+              ))}
+            </motion.div>
+
+            <motion.div
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: 0.25 }}
+              className="mt-14 flex items-center gap-4 text-xs text-ink-soft"
+            >
+              <span>Powered by</span>
+              {/* Logo do Google Ads aumentada com h-9 e md:h-11 para dar mais presença mantendo o minimalismo */}
+              <img src={googleAdsLogo} alt="Google Ads" className="h-9 w-auto opacity-90 md:h-11" />
+            </motion.div>
+          </div>
+
+          {/* COLUNA DA DIREITA (Carrossel Rotativo Premium) */}
+          <motion.div 
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.3 }}
+            className="md:col-span-5 flex justify-center items-center w-full"
+          >
+            {/* Moldura Premium Assimétrica com Glassmorphism sutil */}
+            <div className="relative w-full max-w-[440px] md:max-w-none aspect-[4/3] md:aspect-square rounded-2xl border border-hairline bg-surface/40 p-2 shadow-2xl backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-tr from-ink/[0.02] to-transparent pointer-events-none z-10" />
+              
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentImageIndex}
+                  src={carouselImages[currentImageIndex]}
+                  alt={`Anúncio Studio 21 - Slide ${currentImageIndex + 1}`}
+                  initial={{ opacity: 0, scale: 0.98, x: 8 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 1.01, x: -8 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0 w-full h-full object-cover rounded-xl p-1"
+                />
+              </AnimatePresence>
+            </div>
           </motion.div>
 
-          <motion.div
-            {...fadeUp}
-            transition={{ ...fadeUp.transition, delay: 0.25 }}
-            className="mt-14 flex items-center gap-4 text-xs text-ink-soft"
-          >
-            <span>Powered by</span>
-            <img src={googleAdsLogo} alt="Google Ads" className="h-5 w-auto opacity-80" />
-          </motion.div>
         </div>
       </section>
 
