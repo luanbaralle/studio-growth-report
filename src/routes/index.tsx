@@ -710,19 +710,22 @@ function ReportPage() {
               icon: <Target className="h-5 w-5" />,
               big: "R$ 3,5K",
               label: "Meta de investimento",
-              color: "ga-blue",
+              blur: "bg-ga-blue/20",
+              chip: "bg-ga-blue/10 text-ga-blue",
             },
             {
               icon: <Calendar className="h-5 w-5" />,
               big: "32 dias",
               label: "Prazo restante",
-              color: "ga-yellow",
+              blur: "bg-ga-yellow/25",
+              chip: "bg-ga-yellow/15 text-ga-yellow",
             },
             {
               icon: <Gift className="h-5 w-5" />,
               big: "R$ 2,5K",
               label: "Bônus em anúncios",
-              color: "ga-green",
+              blur: "bg-ga-green/20",
+              chip: "bg-ga-green/10 text-ga-green",
             },
           ].map((c, i) => (
             <motion.div
@@ -731,14 +734,15 @@ function ReportPage() {
               transition={{ ...fadeUp.transition, delay: i * 0.1 }}
               className="relative overflow-hidden rounded-2xl border border-hairline bg-surface p-6 md:p-8"
             >
-              <div className={`absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl bg-${c.color}/20`} />
-              <div className={`relative flex h-10 w-10 items-center justify-center rounded-xl bg-${c.color}/10 text-${c.color}`}>
+              <div className={`absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl ${c.blur}`} />
+              <div className={`relative flex h-10 w-10 items-center justify-center rounded-xl ${c.chip}`}>
                 {c.icon}
               </div>
               <div className="num font-display relative mt-8 text-5xl text-ink md:text-6xl">{c.big}</div>
               <div className="relative mt-2 text-sm text-ink-soft">{c.label}</div>
             </motion.div>
           ))}
+
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2">
