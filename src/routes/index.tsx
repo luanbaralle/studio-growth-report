@@ -702,58 +702,90 @@ function ReportPage() {
             <span className="num text-ga-green">R$ 2.500</span> em bônus do Google
           </>
         }
-        intro="O Google Ads está com uma promoção ativa que pode beneficiar diretamente o Studio 21. Ao atingir uma meta de investimento dentro de um prazo, a plataforma libera créditos adicionais para usar em anúncios — sem custo extra para o salão."
+        intro="O Google Ads está com uma promoção ativa: ao investir R$ 3.500 em até 32 dias, o Studio 21 recebe R$ 2.500 em créditos extras para anúncios — sem custo adicional."
       >
-        <div className="grid gap-5 md:grid-cols-3">
-          {[
-            {
-              icon: <Target className="h-5 w-5" />,
-              big: "R$ 3,5K",
-              label: "Meta de investimento",
-              blur: "bg-ga-blue/20",
-              chip: "bg-ga-blue/10 text-ga-blue",
-            },
-            {
-              icon: <Calendar className="h-5 w-5" />,
-              big: "32 dias",
-              label: "Prazo restante",
-              blur: "bg-ga-yellow/25",
-              chip: "bg-ga-yellow/15 text-ga-yellow",
-            },
-            {
-              icon: <Gift className="h-5 w-5" />,
-              big: "R$ 2,5K",
-              label: "Bônus em anúncios",
-              blur: "bg-ga-green/20",
-              chip: "bg-ga-green/10 text-ga-green",
-            },
-          ].map((c, i) => (
-            <motion.div
-              key={c.label}
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: i * 0.1 }}
-              className="relative overflow-hidden rounded-2xl border border-hairline bg-surface p-6 md:p-8"
-            >
-              <div className={`absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl ${c.blur}`} />
-              <div className={`relative flex h-10 w-10 items-center justify-center rounded-xl ${c.chip}`}>
-                {c.icon}
+        <motion.div
+          {...fadeUp}
+          className="rounded-3xl border border-hairline bg-surface p-6 md:p-10"
+        >
+          <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-2">
+              <div className="text-[11px] uppercase tracking-[0.18em] text-ink-soft">Meta de investimento</div>
+              <div className="num font-display text-5xl text-ink md:text-6xl">R$ 3.500</div>
+              <div className="text-sm text-ink-soft">Prazo: 32 dias restantes</div>
+            </div>
+            <div className="flex items-center gap-4 rounded-2xl border border-ga-green/20 bg-ga-green/10 px-6 py-4">
+              <Gift className="h-6 w-6 text-ga-green" />
+              <div>
+                <div className="text-[11px] uppercase tracking-[0.18em] text-ga-green">Recompensa</div>
+                <div className="num font-display text-2xl text-ink">R$ 2.500</div>
               </div>
-              <div className="num font-display relative mt-8 text-5xl text-ink md:text-6xl">{c.big}</div>
-              <div className="relative mt-2 text-sm text-ink-soft">{c.label}</div>
-            </motion.div>
-          ))}
+            </div>
+          </div>
 
-        </div>
+          <div className="mt-8">
+            <div className="flex items-baseline justify-between">
+              <div className="text-sm font-medium text-ink">Progresso do investimento</div>
+              <div className="num text-sm font-semibold text-ink">R$ 1.230 de R$ 3.500</div>
+            </div>
+            <div className="mt-3 h-4 w-full overflow-hidden rounded-full bg-muted">
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: "35%" }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="h-full rounded-full bg-ga-green"
+              />
+            </div>
+            <div className="mt-3 flex items-center justify-between text-sm">
+              <span className="text-ink-soft">Já investido: <span className="font-semibold text-ink">R$ 1.230</span></span>
+              <span className="text-ink-soft">Faltam: <span className="font-semibold text-ga-red">R$ 2.270</span></span>
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              {
+                label: "Investimento realizado",
+                value: "R$ 1.230",
+                desc: "Valor já aplicado nos primeiros 30 dias",
+              },
+              {
+                label: "Investimento faltante",
+                value: "R$ 2.270",
+                desc: "Necessário para liberar o crédito",
+              },
+              {
+                label: "Crédito a receber",
+                value: "R$ 2.500",
+                desc: "Bônus do Google ao atingir a meta",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="rounded-xl border border-hairline bg-surface-elevated p-5"
+              >
+                <div className="text-[11px] uppercase tracking-[0.18em] text-ink-soft">{item.label}</div>
+                <div className="num font-display mt-2 text-3xl text-ink">{item.value}</div>
+                <div className="mt-1 text-xs text-ink-soft">{item.desc}</div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           <motion.div {...fadeUp} className="rounded-2xl border border-hairline bg-surface p-6 md:p-8">
-            <h3 className="text-base font-semibold text-ink">Como atingir essa meta</h3>
+            <h3 className="text-base font-semibold text-ink">Como atingir a meta</h3>
             <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-              Com um orçamento diário de <span className="text-ink">R$ 75</span>, o investimento
-              mensal seria de aproximadamente R$ 2.250. Em pouco mais de um mês e meio nesse ritmo,
-              a meta de R$ 3.500 seria atingida — e os{" "}
-              <span className="text-ink">R$ 2.500 em créditos</span> seriam liberados
-              automaticamente pelo Google.
+              Com o orçamento atual de <span className="text-ink">R$ 75/dia</span>, faltam aproximadamente{" "}
+              <span className="text-ink">R$ 2.270</span> para completar os R$ 3.500 necessários. Mantendo o
+              investimento diário, a meta será atingida dentro do prazo de 32 dias — e os{" "}
+              <span className="text-ink">R$ 2.500 em créditos</span> serão liberados automaticamente pelo
+              Google.
             </p>
           </motion.div>
           <motion.div
