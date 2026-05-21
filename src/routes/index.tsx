@@ -56,14 +56,14 @@ function ReportPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       {/* ---------- TOP BAR ---------- */}
-      <header className="sticky top-0 z-40 border-b border-hairline bg-background/80 backdrop-blur-lg">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/95 backdrop-blur-lg">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 md:px-8">
           <div className="flex items-center gap-3">
             <img src={studioLogo} alt="Studio 21" className="h-7 w-auto md:h-8" />
           </div>
-          <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-ink-soft">
+          <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] text-white/60">
             <span className="hidden sm:inline">Relatório · 1º Mês</span>
-            <span className="h-1 w-1 rounded-full bg-ink/40 sm:inline-block" />
+            <span className="h-1 w-1 rounded-full bg-white/40 sm:inline-block" />
             <span>Mai · 2026</span>
           </div>
         </div>
