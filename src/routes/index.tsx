@@ -24,9 +24,9 @@ import {
 import studioLogo from "@/assets/studio21-logo.png";
 import googleAdsLogo from "@/assets/google-ads-logo.png";
 import googleAdsDashboard from "@/assets/google-ads-dashboard.png";
-// Adicione aqui os imports dos outros dois prints se necessário:
-// import googleAdsPrint2 from "@/assets/google-ads-print2.png";
-// import googleAdsPrint3 from "@/assets/google-ads-print3.png";
+import printAnuncio1 from "@/assets/Captura de tela 2026-05-20 235029.png";
+import printAnuncio2 from "@/assets/Captura de tela 2026-05-20 235038.png";
+import printAnuncio3 from "@/assets/WhatsApp Image 2026-05-20 at 23.46.33.jpeg";
 
 import { Section } from "@/components/report/Section";
 import { MetricCard } from "@/components/report/MetricCard";
@@ -59,9 +59,9 @@ const fadeUp = {
 
 // Array de imagens do carrossel rotativo
 const carouselImages = [
-  googleAdsDashboard, 
-  googleAdsDashboard, // Substitua pelo import do print 2
-  googleAdsDashboard, // Substitua pelo import do print 3
+  printAnuncio1, 
+  printAnuncio2, // Substitua pelo import do print 2
+  printAnuncio3, // Substitua pelo import do print 3
 ];
 
 function ReportPage() {
